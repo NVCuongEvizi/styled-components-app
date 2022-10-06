@@ -1,8 +1,9 @@
+import { GlobalStyles } from "./components/styles/Global";
 
 function App() {
   return (
     <div className="App">
-      <h1>Theme Switching</h1>
+      <GlobalStyles />
     </div>
   );
 }
