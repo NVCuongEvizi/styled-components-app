@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 const useFetchTheme = () => {
   const [apiTheme, setApiTheme] = useState('')
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
   useEffect(() => {
     let timerId = null
@@ -22,22 +23,31 @@ const useFetchTheme = () => {
             border: "hsl(0, 0%, 87%)",
           },
         })
+        reject({
+          msg: 'Opps! Cannot load this theme'
+        })
       }, 3000)
-      // console.log('running...')
+      console.log('running...')
     })
     api.then((data) => {
       setApiTheme(data)
       setLoading(false)
+      setError('')
     })
+      .catch((err) => {
+        setApiTheme('')
+        setLoading(false)
+        setError(err.msg)
+      })
 
     return () => {
       clearTimeout(timerId)
       timerId = null
-      // console.log('removing...')
+      console.log('removed')
     }
   }, [])
 
-  return [apiTheme, loading]
+  return [apiTheme, loading, error]
 }
 
 export default useFetchTheme;

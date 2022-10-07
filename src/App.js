@@ -7,54 +7,54 @@ import { ThemeProvider } from 'styled-components';
 import { light, dark, blue, green, brown, pink, } from './components/styles/Theme.styled';
 import { useState } from "react";
 import useFetchTheme from "./hook/useFetchTheme";
-import { Link } from 'react-router-dom';
 
 function App() {
   const [selectedTheme, setSelectedTheme] = useState('')
-  const [apiTheme, loading] = useFetchTheme()
+  const [apiTheme, loading, error] = useFetchTheme()
 
   return (
     <>
-      <Link to='/product'>Product</Link>
       {
-        loading ? <h1 style={{ textAlign: 'center' }}>Loading...</h1> :
-          <ThemeProvider theme={selectedTheme ? selectedTheme : apiTheme}>
-            <div className="App">
-              <GlobalStyles />
-              <Header>Game of Thrones Quotes</Header>
-              <ThemeContainer>
-                <span>Themes: </span>
-                <ThemeButton
-                  className={`light ${selectedTheme === light ? 'active' : ''}`}
-                  onClick={() => setSelectedTheme(light)}
-                ></ThemeButton>
-                <ThemeButton
-                  className={`dark ${selectedTheme === dark ? 'active' : ''}`}
-                  onClick={() => setSelectedTheme(dark)}
-                ></ThemeButton>
-                <ThemeButton
-                  className={`blue ${selectedTheme === blue ? 'active' : ''}`}
-                  onClick={() => setSelectedTheme(blue)}
-                ></ThemeButton>
-                <ThemeButton
-                  className={`green ${selectedTheme === green ? 'active' : ''}`}
-                  onClick={() => setSelectedTheme(green)}
-                ></ThemeButton>
-                <ThemeButton
-                  className={`brown ${selectedTheme === brown ? 'active' : ''}`}
-                  onClick={() => setSelectedTheme(brown)}
-                ></ThemeButton>
-                <ThemeButton
-                  className={`pink ${selectedTheme === pink ? 'active' : ''}`}
-                  onClick={() => setSelectedTheme(pink)}
-                ></ThemeButton>
-              </ThemeContainer>
-              <Quotes />
-              <Footer>
-                <p>Clone by NVC</p>
-              </Footer>
-            </div>
-          </ThemeProvider >
+        loading ? <h1 style={{ textAlign: 'center' }}>Loading...</h1>
+          : (error ? <h1 style={{ textAlign: 'center' }}>{error}</h1>
+            :
+            <ThemeProvider theme={selectedTheme ? selectedTheme : apiTheme}>
+              <div className="App">
+                <GlobalStyles />
+                <Header>Game of Thrones Quotes</Header>
+                <ThemeContainer>
+                  <span>Themes: </span>
+                  <ThemeButton
+                    className={`light ${selectedTheme === light ? 'active' : ''}`}
+                    onClick={() => setSelectedTheme(light)}
+                  ></ThemeButton>
+                  <ThemeButton
+                    className={`dark ${selectedTheme === dark ? 'active' : ''}`}
+                    onClick={() => setSelectedTheme(dark)}
+                  ></ThemeButton>
+                  <ThemeButton
+                    className={`blue ${selectedTheme === blue ? 'active' : ''}`}
+                    onClick={() => setSelectedTheme(blue)}
+                  ></ThemeButton>
+                  <ThemeButton
+                    className={`green ${selectedTheme === green ? 'active' : ''}`}
+                    onClick={() => setSelectedTheme(green)}
+                  ></ThemeButton>
+                  <ThemeButton
+                    className={`brown ${selectedTheme === brown ? 'active' : ''}`}
+                    onClick={() => setSelectedTheme(brown)}
+                  ></ThemeButton>
+                  <ThemeButton
+                    className={`pink ${selectedTheme === pink ? 'active' : ''}`}
+                    onClick={() => setSelectedTheme(pink)}
+                  ></ThemeButton>
+                </ThemeContainer>
+                <Quotes />
+                <Footer>
+                  <p>Clone by NVC</p>
+                </Footer>
+              </div>
+            </ThemeProvider >)
       }
     </>
   );
