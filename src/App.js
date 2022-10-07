@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import { light, dark, blue, green, brown, pink, } from './components/styles/Theme.styled';
 import { useState } from "react";
 import useFetchTheme from "./hook/useFetchTheme";
+import { Link } from 'react-router-dom';
 
 function App() {
   const [selectedTheme, setSelectedTheme] = useState('')
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <>
+      <Link to='/product'>Product</Link>
       {
         loading ? <h1 style={{ textAlign: 'center' }}>Loading...</h1> :
           <ThemeProvider theme={selectedTheme ? selectedTheme : apiTheme}>
